@@ -139,7 +139,7 @@
   }
   li {
     font-size: 14px;
-    padding: 0 14px;
+    padding: 0 12px;
     color: gray;
   }
   input[type="checkbox"],
@@ -155,8 +155,7 @@
     }
   }
   input[type="checkbox"] {
-    width: 12px;
-    background-color: tomato;
+    margin-right: 3px;
   }
   div.container-btn {
     position: absolute;
