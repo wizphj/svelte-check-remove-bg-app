@@ -1,25 +1,26 @@
 <script>
   import { selectedFolder } from "@stores/store.js";
 
-  let filesList;
-
-  function inputFilesList(files) {
-    filesList = [...files];
-    for (let file in filesList) {
-      let fileName = filesList[file].name;
-      if (fileName.indexOf("100_") > 0) {
-        filesList.slice(file);
-      }
+  function inputFilesList(files) {    
+    let filesList = [];
+    
+    for (let file in files) {        
+      const pattern = /^100_[0-9+'-png]*(.(jpg|png|gif))/g;
+      if (pattern.test(files[file].name))       
+        filesList.push(files[file]);               
     }
+    
     $selectedFolder = filesList;
+    reorderFilesList(filesList);
   }
 
-  function reorderFilesList() {
+  function reorderFilesList(filesList) {
     filesList.sort(function (a, b) {
-      let _a = parseInt(a.name.replace("100_", "").replace(".jpg", ""));
-      let _b = parseInt(b.name.replace("100_", "").replace(".jpg", ""));
+      let _a = parseInt(a.name.replace("100_", "").split(".")[0]);
+      let _b = parseInt(b.name.replace("100_", "").split(".")[0]);
       return _a - _b;
     });
+    
     $selectedFolder = filesList;
   }
 </script>
