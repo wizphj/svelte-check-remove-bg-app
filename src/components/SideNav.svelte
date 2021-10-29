@@ -58,8 +58,7 @@
               type="checkbox"
               value={imgFile.name}
               bind:group={selectedImages}
-            />
-            &nbsp; {imgFile.name.split(".")[0]}
+            />{imgFile.name.split(".")[0]}
           </label>
         </li>
       {/each}
