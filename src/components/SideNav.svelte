@@ -9,7 +9,7 @@
 
   let toasts = [];
   let item = 0;
-
+  
   function setToast(msg) {
     //추가
     toasts.push({
@@ -38,6 +38,12 @@
         });
     }
   }
+  
+  function goScroll(imgEl) {
+      let scrollArea = document.querySelector("main"); 
+      let location = document.getElementById(imgEl).offsetTop;
+      scrollArea.scrollTo({top: location});
+    }
 </script>
 
 <div class="toast-container">
@@ -52,13 +58,14 @@
   {#if $selectedFolder != null}
     <ul on:mousewheel>
       {#each $selectedFolder as imgFile (imgFile.name)}
-        <li>
-          <label>
-            <input
-              type="checkbox"
-              value={imgFile.name}
-              bind:group={selectedImages}
-            />{imgFile.name.split(".")[0]}
+        <li>          
+          <input
+          type="checkbox"
+          value={imgFile.name}
+          bind:group={selectedImages}
+        /><label on:click={()=>{
+              goScroll(imgFile.name);
+          }}>{imgFile.name.split(".")[0]}
           </label>
         </li>
       {/each}
@@ -138,23 +145,23 @@
   }
   li {
     font-size: 14px;
-    padding: 0 12px;
+    padding: 0 12px 16px;
     color: gray;
   }
-  input[type="checkbox"],
-  label {
-    display: flex;
-    height: 24px;
+  input[type="checkbox"]{
     align-items: center;
     margin: 0;
     padding: 0;
     cursor: pointer;
+    margin-right: 3px;
+  }
+  label{
+    position:relative;
+    bottom:1px;
+    cursor: pointer;
     &:hover {
       color: royalblue;
     }
-  }
-  input[type="checkbox"] {
-    margin-right: 3px;
   }
   div.container-btn {
     position: absolute;
