@@ -2,11 +2,11 @@
   import { afterUpdate } from "svelte";
   import { selectedFolder } from "@stores/store.js";
   import Viewer from "@components/Viewer.svelte";
-  let location = 0;
   afterUpdate(() => {
     if ($selectedFolder != null) {
-      location = document.querySelector(".viewer-container").offsetTop;
-      window.scrollTo({ top: location, behavior: "smooth" });
+      let scrollArea = document.querySelector("main"); 
+      let location = document.querySelector(".viewer-container").offsetTop;
+      scrollArea.scrollTo({ top: location, behavior: "smooth" });
     }
   });
 </script>
